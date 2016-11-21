@@ -1,2 +1,15 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% @skill = Skill.new %>
+
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path "background.jpg" %>');">
+  <div class="banner-content">
+    <h1>DON'T DO IT YOURSELF</h1>
+    <p>Enjoy your neighbour's skills</p>
+
+    <%= simple_form_for @skill, html: { class: "form-inline" } do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :location, label: false, placeholder: "Location", input_html: { style: 'height: 49px;' } %>
+      <%= f.input :category, collection: CATEGORIES, label: false, include_blank: "--Select category --", input_html: { style: 'height: 49px;' } %>
+      <%= f.button :submit, "Submit", class: "btn btn-danger btn-lg" %>
+    <% end %>
+  </div>
+</div>
