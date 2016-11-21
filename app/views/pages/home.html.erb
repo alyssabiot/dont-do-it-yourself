@@ -5,7 +5,7 @@
     <h1>DON'T DO IT YOURSELF</h1>
     <p>Enjoy your neighbour's skills</p>
 
-    <%= simple_form_for @skill, html: { class: "form-inline" } do |f| %>
+    <%= simple_form_for @skill, html: { class: "form-inline home-form" } do |f| %>
       <%= f.error_notification %>
       <%= f.input :location, label: false, placeholder: "Location", input_html: { style: 'height: 49px;' } %>
       <%= f.input :category, collection: CATEGORIES, label: false, include_blank: "--Select category --", input_html: { style: 'height: 49px;' } %>
