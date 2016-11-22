@@ -22,6 +22,8 @@ class SkillsController < ApplicationController
 
   def show
     @user = @skill.user
+    @skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == @skill.category }
+    @image_id = @skill_hash[0][:photo_filepath]
   end
 
   private

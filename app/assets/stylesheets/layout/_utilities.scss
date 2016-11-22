@@ -28,3 +28,33 @@
   min-height: 100%;
   position: relative;
 }
+
+.card-box {
+  height: 130px;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  h1, h2, h3 {
+    margin: 0px;
+  }
+}
+
+.card-item {
+  flex: 0 0 100%
+}
+
+.top-border {
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-top-color: $blue;
+}
+
+.bandeau-blanc {
+  height: 20px;
+}
+
+a:hover {
+  text-decoration: none;
+}

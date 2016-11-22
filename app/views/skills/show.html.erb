@@ -1,1 +1,56 @@
-<h1><%=  @skill.title %></h1>
+<div>
+  <% if !@skill.photo.blank? %>
+    <div class="banner banner-skill" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+    url('<%= cl_image_path @skill.photo %>');">
+    <h3><%=  @skill.title %></h3>
+    </div>
+  <% else %>
+    <div class="banner banner-skill" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+    url('<%= image_path(@image_id) %>');">
+    <h3><%=  @skill.title %></h3>
+    </div>
+  <% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <div class="card-box">
+        <div class="card-item">
+          <h4><%= @skill.location %></h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="card-box">
+        <div class="card-item">
+          <%= link_to user_path(@user) do %>
+            <% if !@user.photo.blank? %>
+              <%= cl_image_tag @user.photo, height: 300, width: 400, crop: :fill %>
+            <% else %>
+              <%= image_tag "default-profile.png", class: "avatar" %>
+            <% end %>
+            <h4> <%= @user.first_name %> <%= @user.last_name %> </h4>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="card-box">
+        <div class="card-item">
+          <button class = "btn btn-primary btn-lg">BOOK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="top-border">
+    <h5><%= @skill.description %></h5>
+  </div>
+  <div class="bandeau-blanc">
+  </div>
+  <div class="banner banner-skill" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+    url('<%= image_path("http://placehold.it/30x30") %>');">
+    <h3> carte </h3>
+  </div>
+  <div class="bandeau-blanc">
+  </div>
+</div>
