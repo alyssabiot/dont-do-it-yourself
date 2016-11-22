@@ -1,4 +1,60 @@
 CATEGORIES = [ "All categories", "Pets", "Kids", "Garden", "Handiwork", "Beauty / Well-being", "Sports", "IT", "Food", "Mechanics", "Photography", "Music", "Interior design", "Housekeeping", "Fashion", "Paper work / Legal", "Coaching", "Other" ]
+CATEGORIES_PHOTOS = [
+  {category: "Pets" ,
+    photo_filepath: "Dog.jpeg"
+},
+  {category: "All categories",
+    photo_filepath: "other.jpg"
+},
+  {category: "Kids",
+    photo_filepath: "kids.jpg"
+},
+  {category: "Garden",
+    photo_filepath: "Garden.jpg"
+},
+  {category: "Handiwork" ,
+    photo_filepath: "handiwork.jpg"
+},
+  {category: "Beauty / Well-being",
+    photo_filepath: "Beauty.jpg"
+},
+  {category: "Sports" ,
+    photo_filepath: "sport.jpeg"
+},
+  {category: "IT",
+    photo_filepath: "other.jpg"
+},
+  {category: "Food",
+    photo_filepath: "other.jpg"
+},
+  {category: "Mechanics" ,
+    photo_filepath: "other.jpg"
+},
+  {category: "Photography",
+    photo_filepath: "other.jpg"
+},
+  {category: "Music",
+    photo_filepath: "Music.jpg"
+},
+  {category: "Interior design",
+    photo_filepath: "interior design.jpg"
+},
+  {category: "Housekeeping" ,
+    photo_filepath: "Housekeeping.jpg"
+},
+  {category: "Fashion",
+    photo_filepath: "Fashion.jpg"
+},
+  {category: "Paper work / Legal",
+    photo_filepath: "paperwork.jpg"
+},
+  {category: "Coaching",
+    photo_filepath: "coaching.jpg"
+},
+  {category: "Other",
+    photo_filepath: "other.jpg"
+}
+]
 
 class Skill < ApplicationRecord
   mount_uploader :photo, PhotoUploader
