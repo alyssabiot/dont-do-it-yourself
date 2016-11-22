@@ -24,9 +24,9 @@
   background: #3b5998;
 }
 
-.body {
-  min-height: 100%;
-  position: relative;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 .card-box {
