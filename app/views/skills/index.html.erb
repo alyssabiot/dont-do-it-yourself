@@ -1,0 +1,25 @@
+<div class="container">
+<h2>Check out those amazingskills!</h2>
+
+
+
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-9">
+      <% if @skills.empty? %>
+        <p>Sorry, we could't find the skill you are looking for... Check our others skills</p>
+      <% else %>
+        <% @skills.each do |skill| %>
+          <div class="col-xs-12 col-sm-4">
+            <%= cl_image_tag skill.photo, height: 300, width: 300 %>
+            <%= skill.title %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <img src="http://placehold.it/300x500" alt="">
+    </div>
+  </div>
+</div>
