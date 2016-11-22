@@ -1,5 +1,7 @@
 class SkillsController < ApplicationController
   before_action :set_user, only: [:new, :create]
+  before_action :set_skill, only: [:show]
+
   def index
 
   end
@@ -18,6 +20,12 @@ class SkillsController < ApplicationController
     end
   end
 
+  def show
+    @user = @skill.user
+    @skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == @skill.category }
+    @image_id = @skill_hash[0][:photo_filepath]
+  end
+
   private
 
   def skill_params
@@ -26,5 +34,9 @@ class SkillsController < ApplicationController
 
   def set_user
     @user = User.find(params[:user_id])
+  end
+
+  def set_skill
+    @skill = Skill.find(params[:id])
   end
 end
