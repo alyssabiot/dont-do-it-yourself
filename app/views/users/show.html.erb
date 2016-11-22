@@ -1,0 +1,38 @@
+<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+<% avatar_url = "http://placehold.it/30x30" %>
+<%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-ddiy", "data-toggle" => "dropdown" %>
+
+<h2>My skills</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <%= @user.skills.each do |skill| %>
+        <%= link_to skill.name, skill_path(skill) %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+ <div class="row">
+    <%= @user.skills.each do |skill| %>
+     <div class="col-xs-12 col-sm-4">
+       <div class="card">
+         <div class="card-body">
+           <%= link_to skill.name, skill_path(skill) %>
+             <div class="card-picture" style="background-image: url('<%= cl_image_path cocktail.photo %>')">
+               <div class="card-hover">
+               </div>
+             </div>
+           <% end %>
+           <div class="card-name text-center">
+             <h4><%= skill.name %></h4>
+           </div>
+         </div>
+       </div>
+     </div>
+   <% end %>
+ </div>
+</div>
