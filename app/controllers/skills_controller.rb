@@ -3,7 +3,12 @@ class SkillsController < ApplicationController
   before_action :set_skill, only: [:show]
 
   def index
-
+    @skills = []
+    if params["category"] == "All categories"
+      @skills = Skill.all
+    else
+      @skills = Skill.all.where(category: params["category"])
+    end
   end
 
   def new
