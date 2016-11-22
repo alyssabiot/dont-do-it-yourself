@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
 user1 = User.new(email: "alyssa@gmail.com", password: "123456")
 user1.first_name = "Alyssa"
 user1.last_name = "Biot"
@@ -47,6 +46,7 @@ skill1.user = user1
 skill1.save
 
 skill2 = Skill.new(category: "Kids", location:"Paris", price_per_hour: 12, title: "Kids homework", description: "Titulaire d'un CAP petite enfance, j'aide vos enfants à faire leurs devoirs, toutes matières primaire et collège. Patiente et énergique, je prendrai le plus grand soin de vos rejetons !")
+
 skill2.user = user1
 skill2.save
 
