@@ -2,7 +2,20 @@
   background: $green;
   padding: 30px 0;
   color: white;
-   width: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -100px;
+}
+
+#footer,
+.push {
+  height: 100px;
 }
 
 #footer p {

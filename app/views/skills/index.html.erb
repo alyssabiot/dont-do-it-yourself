@@ -1,25 +1,61 @@
 <div class="container">
-<h2>Check out those amazingskills!</h2>
-
-
-
-
-
+<h2>Check out those amazing skills!</h2>
   <div class="row">
-    <div class="col-xs-12 col-sm-9">
+    <div class="col-sm-7">
       <% if @skills.empty? %>
         <p>Sorry, we could't find the skill you are looking for... Check our others skills</p>
       <% else %>
-        <% @skills.each do |skill| %>
-          <div class="col-xs-12 col-sm-4">
-            <%= cl_image_tag skill.photo, height: 300, width: 300 %>
-            <%= skill.title %>
-          </div>
-        <% end %>
+        <div class="row">
+          <% @skills.each do |skill| %>
+            <div class="col-xs-12 col-sm-6">
+              <div class="card" >
+                <% if !skill.photo.blank? %>
+                  <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                  url('<%= cl_image_path skill.photo %>');">
+                    <div class="card-category"><%= skill.category %></div>
+                    <div class="card-description">
+                      <%= link_to skill_path(skill) do %>
+                        <h2><%= skill.title %></h2>
+                      <% end %>
+                    </div>
+                    <div>
+                      <% if !skill.user.photo.blank? %>
+                        <%= cl_image_tag skill.user.photo, height: 300, width: 400, crop: :fill %>
+                      <% else %>
+                        <%= image_tag "default-profile.png", class: "card-user avatar"%>
+                      <% end %>
+                    </div>
+                    <a class="card-link" href="#" ></a>
+                  </div>
+                <% else %>
+                  <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == skill.category } %>
+                  <% image_id = skill_hash[0][:photo_filepath] %>
+                  <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                  url('<%= image_path(image_id) %>');">
+                    <div class="card-category"><%= skill.category %></div>
+                    <div class="card-description">
+                      <%= link_to skill_path(skill) do %>
+                      <h2><%= skill.title %></h2>
+          <!--             <p><%= skill.description %></p>
+           -->        <% end %>
+                    </div>
+                    <div>
+                      <% if !skill.user.photo.blank? %>
+                        <%= cl_image_tag skill.user.photo, height: 300, width: 400, crop: :fill %>
+                      <% else %>
+                        <%= image_tag "default-profile.png", class: "card-user avatar"%>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
-    <div class="col-xs-12 col-sm-3">
-      <img src="http://placehold.it/300x500" alt="">
+    <div class="col-sm-5">
+      <img src="http://placehold.it/500x600" alt="">
     </div>
   </div>
 </div>
