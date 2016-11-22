@@ -45,7 +45,8 @@ skill1 = Skill.new(category: "Pets", location:"Paris", price_per_hour: 10.5, tit
 skill1.user = user1
 skill1.save
 
-skill2 = Skill.new(category: "Kids", location:"Paris", price_per_hour: 12, title: "Kids homework", description: "Titulaire d'un CAP petite enfance, j'aide vos enfants à faire leurs devoirs, toutes matières primaire et collège. Pasciente et énergique, je prendrai le plus grand soin de vos amours !")
+skill2 = Skill.new(category: "Kids", location:"Paris", price_per_hour: 12, title: "Kids homework", description: "Titulaire d'un CAP petite enfance, j'aide vos enfants à faire leurs devoirs, toutes matières primaire et collège. Patiente et énergique, je prendrai le plus grand soin de vos rejetons !")
+
 skill2.user = user1
 skill2.save
 
