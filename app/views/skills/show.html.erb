@@ -25,7 +25,7 @@
         <div class="card-item">
           <%= link_to user_path(@user) do %>
             <% if !@user.photo.blank? %>
-              <%= cl_image_tag @user.photo, height: 300, width: 400, crop: :fill %>
+              <%= cl_image_tag @user.photo, class: "avatar" %>
             <% else %>
               <%= image_tag "default-profile.png", class: "avatar" %>
             <% end %>
