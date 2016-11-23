@@ -1,7 +1,7 @@
 <div class="container text-center">
   <h1><%= @user.first_name %> <%= @user.last_name %></h1>
   <% if !@user.photo.blank? %>
-    <%= cl_image_tag @user.photo, height: 300, width: 400, crop: :fill %>
+    <%= cl_image_tag @user.photo, class: "avatar-large"  %>
   <% else %>
     <%= image_tag "default-profile.png", class: "avatar-large", id: "navbar-ddiy", "data-toggle" => "dropdown" %>
   <% end %>
@@ -22,7 +22,7 @@
               </div>
               <div>
                 <% if !@user.photo.blank? %>
-                  <%= cl_image_tag @user.photo, height: 300, width: 400, crop: :fill %>
+                  <%= cl_image_tag @user.photo, class: "card-user avatar"%>
                 <% else %>
                   <%= image_tag "default_user_white.png", class: "card-user avatar"%>
                 <% end %>
@@ -43,7 +43,7 @@
               </div>
               <div>
                 <% if !@user.photo.blank? %>
-                  <%= cl_image_tag @user.photo, height: 300, width: 400, crop: :fill %>
+                  <%= cl_image_tag @user.photo, class: "card-user avatar" %>
                 <% else %>
                   <%= image_tag "default_user_white.png", class: "card-user avatar"%>
                 <% end %>
