@@ -15,7 +15,7 @@
 
 <div class="container">
   <div class="row">
-    <% @last_three_skills = [@skills[-1], @skills[-2], @skills[-3]] %>
+    <% @last_three_skills = @skills.last(3) %>
     <% @last_three_skills.each do |skill| %>
       <div class="col-xs-12 col-sm-4">
         <% user = skill.user %>
