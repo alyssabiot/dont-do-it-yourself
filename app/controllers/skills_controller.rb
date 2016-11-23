@@ -9,6 +9,12 @@ class SkillsController < ApplicationController
     else
       @skills = Skill.all.where(category: params["category"])
     end
+    @skills = Skill.where.not(latitude: nil, longitude: nil)
+    @hash = Gmaps4rails.build_markers(@skills) do |skill, marker|
+      marker.lat skill.latitude
+      marker.lng skill.longitude
+    end
+<<<<<<< HEAD
   end
 
   def edit
@@ -18,6 +24,8 @@ class SkillsController < ApplicationController
     @skill.update(skill_params)
     @skill.save
     redirect_to skill_path(@skill)
+=======
+>>>>>>> bf988c3d6d15891c141753aa93a7c5fb6327f1a3
   end
 
   def new
@@ -38,12 +46,21 @@ class SkillsController < ApplicationController
     @user = @skill.user
     @skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == @skill.category }
     @image_id = @skill_hash[0][:photo_filepath]
+    @skill = Skill.find(params[:id])
+    @alert_message = "You are viewing #{@skill.title}"
+    @hash = Gmaps4rails.build_markers(@skill) do |skill, marker|
+      marker.lat skill.latitude
+      marker.lng skill.longitude
+    end
+<<<<<<< HEAD
   end
 
   def destroy
     @skill.active = false
     @skill.save
     redirect_to user_path(current_user)
+=======
+>>>>>>> bf988c3d6d15891c141753aa93a7c5fb6327f1a3
   end
 
   private
