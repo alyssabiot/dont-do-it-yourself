@@ -69,6 +69,43 @@
       </div>
     </div>
   <% end %>
+  <h2>My Bookings as a user</h2>
+    <div class="bandeau-blanc">
+    </div>
+    <div class="row">
+      <% @user.bookings.each do |booking| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card" >
+            <% if !booking.skill.photo.blank? %>
+              <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+              url('<%= cl_image_path booking.skill.photo %>');">
+                <div class="card-category"><%= booking.skill.category %></div>
+                <div class="card-description">
+                    <h2><%= booking.skill.title %> with <%= booking.skill.user.first_name %></h2>
+                    <h3><%= booking.starts_at %></h3>
+                    <p><%= booking.duration %></p>
+                </div>
+              </div>
+            <% else %>
+            <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == booking.skill.category } %>
+            <% image_id = skill_hash[0][:photo_filepath] %>
+            <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+            url('<%= image_url(image_id) %>');">
+                <div class="card-category"><%= booking.skill.category %></div>
+                <div class="card-description">
+                    <h2><%= booking.skill.title %> with <%= booking.skill.user.first_name %></h2>
+                    <p><%= booking.starts_at %></p>
+                    <p><%= booking.duration %> minutes </p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <div class="bandeau-blanc">
+  </div>
 </div>
 <div class="bandeau-blanc">
 </div>
+

@@ -47,7 +47,11 @@
               </div>
             </div>
           <% else %>
-            <button class = "btn btn-primary btn-lg">BOOK</button>
+            <div class="row">
+              <div class="col-xs-12">
+                <%= link_to "Book", new_skill_booking_path(@skill), class: "btn btn-danger btn-lg" %>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>
