@@ -59,3 +59,8 @@ a:hover {
   text-decoration: none;
   opacity: 0.8;
 }
+
+.flexbox-buttons {
+  display: flex;
+  justify-content: space-around;
+}

@@ -20,7 +20,7 @@
                     </div>
                     <div>
                       <% if !skill.user.photo.blank? %>
-                        <%= cl_image_tag skill.user.photo, height: 300, width: 400, crop: :fill %>
+                        <%= cl_image_tag skill.user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar" %>
                       <% else %>
                         <%= image_tag "default_user_white.png", class: "card-user avatar"%>
                       <% end %>
@@ -41,7 +41,7 @@
                     </div>
                     <div>
                       <% if !skill.user.photo.blank? %>
-                        <%= cl_image_tag skill.user.photo, height: 300, width: 400, crop: :fill %>
+                        <%= cl_image_tag skill.user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar"  %>
                       <% else %>
                         <%= image_tag "default_user_white.png", class: "card-user avatar"%>
                       <% end %>
