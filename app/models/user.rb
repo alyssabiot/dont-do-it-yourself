@@ -7,5 +7,4 @@ class User < ApplicationRecord
 
   has_many :skills
   has_many :bookings
-  has_many :bookings, through: :skills
 end
