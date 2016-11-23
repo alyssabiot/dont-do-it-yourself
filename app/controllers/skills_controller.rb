@@ -14,6 +14,7 @@ class SkillsController < ApplicationController
       marker.lat skill.latitude
       marker.lng skill.longitude
     end
+<<<<<<< HEAD
   end
 
   def edit
@@ -23,6 +24,8 @@ class SkillsController < ApplicationController
     @skill.update(skill_params)
     @skill.save
     redirect_to skill_path(@skill)
+=======
+>>>>>>> bf988c3d6d15891c141753aa93a7c5fb6327f1a3
   end
 
   def new
@@ -49,12 +52,15 @@ class SkillsController < ApplicationController
       marker.lat skill.latitude
       marker.lng skill.longitude
     end
+<<<<<<< HEAD
   end
 
   def destroy
     @skill.active = false
     @skill.save
     redirect_to user_path(current_user)
+=======
+>>>>>>> bf988c3d6d15891c141753aa93a7c5fb6327f1a3
   end
 
   private
