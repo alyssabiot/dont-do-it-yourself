@@ -18,9 +18,8 @@
               <div class="card-category"><%= skill.category %></div>
               <div class="card-description">
                 <%= link_to skill_path(skill) do %>
-                <h2><%= skill.title %></h2>
-    <!--             <p><%= skill.description %></p>
-     -->        <% end %>
+                  <h2><%= skill.title %></h2>
+                <% end %>
               </div>
               <div>
                 <% if !@user.photo.blank? %>
