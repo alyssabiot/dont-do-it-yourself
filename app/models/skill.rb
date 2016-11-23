@@ -66,4 +66,6 @@ class Skill < ApplicationRecord
   validates :title, presence: true, allow_blank: false
   validates :description, presence: true, allow_blank: false
   validates :price_per_hour, presence: true, allow_blank: false
+  geocoded_by :location
+  after_validation :geocode, if: :location_changed?
 end

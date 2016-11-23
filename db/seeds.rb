@@ -42,15 +42,15 @@ user5.address = "102 rue Oberkampf 75011 Paris"
 user5.average_rating = 1.0
 user5.save
 
-skill1 = Skill.new(category: "Pets", location:"Paris", price_per_hour: 10.5, title: "Dog sitting in Paris", description: "Je promène des chiens depuis 12 ans dans le monde entier. Calme et affectueuse, je prendrai le plus grand soin de vos amours !")
+skill1 = Skill.new(category: "Pets", location:"16 villa Gaudelet, Paris", price_per_hour: 10.5, title: "Dog sitting in Paris", description: "Je promène des chiens depuis 12 ans dans le monde entier. Calme et affectueuse, je prendrai le plus grand soin de vos amours !")
 skill1.user = user1
 skill1.save!
 
-skill2 = Skill.new(category: "Kids", location:"Paris", price_per_hour: 12, title: "Kids homework", description: "Titulaire d'un CAP petite enfance, j'aide vos enfants à faire leurs devoirs, toutes matières primaire et collège. Patiente et énergique, je prendrai le plus grand soin de vos rejetons !")
+skill2 = Skill.new(category: "Kids", location:"150 avenue des Champs Élysées, Paris", price_per_hour: 12, title: "Kids homework", description: "Titulaire d'un CAP petite enfance, j'aide vos enfants à faire leurs devoirs, toutes matières primaire et collège. Patiente et énergique, je prendrai le plus grand soin de vos rejetons !")
 
 skill2.user = user1
 skill2.save!
 
-skill3 = Skill.new(category: "Kids", location:"Paris", price_per_hour: 12, title: "Help your kids out with their homeworks", description: "Professeur particulier à domicile de mathématiques pour collègiens et lycéens en difficulté ! Avec moi, les résultats sont visibles dès le premier cours !")
+skill3 = Skill.new(category: "Kids", location:"46 boulevard Voltaire, Paris", price_per_hour: 12, title: "Help your kids out with their homeworks", description: "Professeur particulier à domicile de mathématiques pour collègiens et lycéens en difficulté ! Avec moi, les résultats sont visibles dès le premier cours !")
 skill3.user = user2
 skill3.save!

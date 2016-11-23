@@ -9,6 +9,11 @@ class SkillsController < ApplicationController
     else
       @skills = Skill.all.where(category: params["category"])
     end
+    @skills_locations = @skills.where.not(latitude: nil, longitude: nil)
+    @hash = Gmaps4rails.build_markers(@skills_locations) do |skill, marker|
+      marker.lat skill.latitude
+      marker.lng skill.longitude
+    end
   end
 
   def edit
@@ -39,6 +44,10 @@ class SkillsController < ApplicationController
     @user = @skill.user
     @skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == @skill.category }
     @image_id = @skill_hash[0][:photo_filepath]
+    @hash = Gmaps4rails.build_markers(@skill) do |skill, marker|
+      marker.lat skill.latitude
+      marker.lng skill.longitude
+    end
   end
 
   def destroy

@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20161123110631) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "photo"
+    t.float    "latitude"
+    t.float    "longitude"
     t.boolean  "active",         default: true
     t.index ["user_id"], name: "index_skills_on_user_id", using: :btree
   end

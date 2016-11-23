@@ -10,9 +10,14 @@
   </div>
 </div>
 
+
 <div class="container">
   <div class="row">
-    <h2>Find out our lastest offers!</h2>
+    <div class="bandeau-blanc">
+    </div>
+    <h2 >Find out our latest offers!</h2>
+    <div class="bandeau-blanc">
+    </div>
     <% @last_three_skills = @skills.last(3) %>
     <% @last_three_skills.each do |skill| %>
       <div class="col-xs-12 col-sm-4">
@@ -29,7 +34,7 @@
               </div>
               <div>
                 <% if !user.photo.blank? %>
-                  <%= cl_image_tag user.photo, height: 300, width: 400, crop: :fill %>
+                  <%= cl_image_tag user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar"   %>
                 <% else %>
                   <%= image_tag "default_user_white.png", class: "card-user avatar"%>
                 <% end %>
@@ -49,7 +54,7 @@
               </div>
               <div>
                 <% if !user.photo.blank? %>
-                  <%= cl_image_tag user.photo, height: 300, width: 400, crop: :fill %>
+                  <%= cl_image_tag user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar" %>
                 <% else %>
                   <%= image_tag "default_user_white.png", class: "card-user avatar"%>
                 <% end %>
