@@ -54,3 +54,12 @@
   <div class="bandeau-blanc">
   </div>
 </div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+    var coord = <%= raw @skill_coordinates %>
+      alert('Skill coordinates are ' + coord.lat + ', ' + coord.lng);
+    });
+  <% end %>
+<% end %>
