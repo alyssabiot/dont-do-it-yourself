@@ -1,6 +1,6 @@
 class SkillsController < ApplicationController
   before_action :set_user, only: [:new, :create]
-  before_action :set_skill, only: [:show]
+  before_action :set_skill, only: [:show, :edit, :update]
 
   def index
     @skills = []
@@ -9,6 +9,15 @@ class SkillsController < ApplicationController
     else
       @skills = Skill.all.where(category: params["category"])
     end
+  end
+
+  def edit
+  end
+
+  def update
+    @skill.update(skill_params)
+    @skill.save
+    redirect_to skill_path(@skill)
   end
 
   def new
@@ -34,7 +43,7 @@ class SkillsController < ApplicationController
   private
 
   def skill_params
-    params.require(:skill).permit(:title,:photo,:price_per_hour, :photo_cache, :description, :category, :location)
+    params.require(:skill).permit(:title, :photo, :price_per_hour, :photo_cache, :description, :category, :location)
   end
 
   def set_user
