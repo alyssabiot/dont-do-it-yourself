@@ -6,4 +6,3 @@
 //= require gmaps/google
 
 // alert('Sadly ...');
-

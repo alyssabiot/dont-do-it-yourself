@@ -36,7 +36,10 @@ class SkillsController < ApplicationController
     @image_id = @skill_hash[0][:photo_filepath]
     @skill = Skill.find(params[:id])
     @alert_message = "You are viewing #{@skill.title}"
-    @skill_coordinates = { lat: @skill.latitude, lng: @skill.longitude }
+    @hash = Gmaps4rails.build_markers(@skill) do |skill, marker|
+      marker.lat skill.latitude
+      marker.lng skill.longitude
+    end
   end
 
   private
