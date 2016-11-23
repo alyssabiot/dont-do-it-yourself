@@ -47,7 +47,17 @@
               </div>
             </div>
           <% else %>
-            <button class = "btn btn-primary btn-lg">BOOK</button>
+            <div class="row">
+              <div class="col-xs-12">
+                <h2>Book this skill</h2>
+                <%= simple_form_for [@skill, @booking] do |f| %>
+                  <%= f.error_notification %>
+                  <%= f.input :starts_at, label: "Date and time" %>
+                  <%= f.input :duration, label: "Duration in minutes" %>
+                  <%= f.button :submit, "Submit", class: "btn btn-primary btn-lg" %>
+      <% end %>
+    </div>
+  </div>
           <% end %>
         </div>
       </div>
