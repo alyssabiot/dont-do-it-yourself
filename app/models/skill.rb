@@ -1,7 +1,7 @@
 CATEGORIES = [ "All categories", "Pets", "Kids", "Garden", "Handiwork", "Beauty / Well-being", "Sports", "IT", "Food", "Mechanics", "Photography", "Music", "Interior design", "Housekeeping", "Fashion", "Paper work / Legal", "Coaching", "Other" ]
 CATEGORIES_PHOTOS = [
   {category: "Pets" ,
-    photo_filepath: "Dog.jpeg"
+    photo_filepath: "dog.jpg"
 },
   {category: "All categories",
     photo_filepath: "other.jpg"
@@ -19,19 +19,19 @@ CATEGORIES_PHOTOS = [
     photo_filepath: "Beauty.jpg"
 },
   {category: "Sports" ,
-    photo_filepath: "sport.jpeg"
+    photo_filepath: "sport.jpg"
 },
   {category: "IT",
-    photo_filepath: "other.jpg"
+    photo_filepath: "IT.jpg"
 },
   {category: "Food",
-    photo_filepath: "other.jpg"
+    photo_filepath: "Food.jpg"
 },
   {category: "Mechanics" ,
-    photo_filepath: "other.jpg"
+    photo_filepath: "mechanics.jpg"
 },
   {category: "Photography",
-    photo_filepath: "other.jpg"
+    photo_filepath: "photography.jpg"
 },
   {category: "Music",
     photo_filepath: "Music.jpg"
@@ -52,11 +52,12 @@ CATEGORIES_PHOTOS = [
     photo_filepath: "coaching.jpg"
 },
   {category: "Other",
-    photo_filepath: "other.jpg"
+    photo_filepath: "tree.jpg"
 }
 ]
 
 class Skill < ApplicationRecord
+  default_scope { where(active: true) }
   mount_uploader :photo, PhotoUploader
   belongs_to :user
   has_many :bookings
