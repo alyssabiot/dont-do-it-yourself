@@ -2,13 +2,67 @@
   <div class="banner-content">
     <h1>DON'T DO IT YOURSELF</h1>
     <p>Enjoy your neighbour's skills</p>
-
     <form action="/skills" method="get" class="home-form">
-      <%= select_tag "location", options_for_select([ "Everywhere", "Paris", "Lille" ]) %>
-      <%= select_tag "category", options_for_select([ "All categories", "Pets", "Kids", "Garden", "Handiwork", "Beauty / Well-being", "Sports", "IT", "Food", "Mechanics", "Photography", "Music", "Interior design", "Housekeeping", "Fashion", "Paper work / Legal", "Coaching", "Other" ]) %>
-      <%= submit_tag "Submit", class: "btn btn-danger btn-lg" %>
+        <%= select_tag "location", options_for_select([ "Everywhere", "Paris", "Lille" ])%>
+        <%= select_tag "category", options_for_select([ "All categories", "Pets", "Kids", "Garden", "Handiwork", "Beauty / Well-being", "Sports", "IT", "Food", "Mechanics", "Photography", "Music", "Interior design", "Housekeeping", "Fashion", "Paper work / Legal", "Coaching", "Other" ]) %>
+        <%= submit_tag "Submit", class: "btn btn-danger btn-lg" %>
     </form>
-
-
   </div>
+</div>
+
+<div class="bandeau-blanc">
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @last_three_skills = [@skills[-1], @skills[-2], @skills[-3]] %>
+    <% @last_three_skills.each do |skill| %>
+      <div class="col-xs-12 col-sm-4">
+        <% user = skill.user %>
+        <div class="card" >
+          <% if !skill.photo.blank? %>
+            <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+            url('<%= cl_image_path skill.photo %>');">
+              <div class="card-category"><%= skill.category %></div>
+              <div class="card-description">
+                <%= link_to skill_path(skill) do %>
+                  <h2><%= skill.title %></h2>
+                <% end %>
+              </div>
+              <div>
+                <% if !user.photo.blank? %>
+                  <%= cl_image_tag user.photo, height: 300, width: 400, crop: :fill %>
+                <% else %>
+                  <%= image_tag "default-profile.png", class: "card-user avatar"%>
+                <% end %>
+              </div>
+              <a class="card-link" href="#" ></a>
+            </div>
+          <% else %>
+            <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == skill.category } %>
+            <% image_id = skill_hash[0][:photo_filepath] %>
+            <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+            url('<%= image_url(image_id) %>');">
+              <div class="card-category"><%= skill.category %></div>
+              <div class="card-description">
+                <%= link_to skill_path(skill) do %>
+                  <h2><%= skill.title %></h2>
+                <% end %>
+              </div>
+              <div>
+                <% if !user.photo.blank? %>
+                  <%= cl_image_tag user.photo, height: 300, width: 400, crop: :fill %>
+                <% else %>
+                  <%= image_tag "default_user_white.png", class: "card-user avatar"%>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="bandeau-blanc">
 </div>
