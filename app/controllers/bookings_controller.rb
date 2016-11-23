@@ -12,10 +12,10 @@ class BookingsController < ApplicationController
 
   private
   def booking_params
-    params.require(:dose).permit(:description, :ingredient_id)
+    params.require(:booking).permit(:starts_at, :duration, :user_id, :skill_id)
   end
 
-  def find_cocktail
-    @cocktail = Cocktail.find(params[:cocktail_id])
+  def find_skill
+    @skill = Skill.find(params[:skill_id])
   end
 end
