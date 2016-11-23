@@ -57,6 +57,7 @@ CATEGORIES_PHOTOS = [
 ]
 
 class Skill < ApplicationRecord
+  default_scope { where(active: true) }
   mount_uploader :photo, PhotoUploader
   belongs_to :user
   has_many :bookings

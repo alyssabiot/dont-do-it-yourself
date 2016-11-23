@@ -1,6 +1,6 @@
 class SkillsController < ApplicationController
   before_action :set_user, only: [:new, :create]
-  before_action :set_skill, only: [:show, :edit, :update]
+  before_action :set_skill, only: [:show, :edit, :update, :destroy]
 
   def index
     @skills = []
@@ -40,10 +40,16 @@ class SkillsController < ApplicationController
     @image_id = @skill_hash[0][:photo_filepath]
   end
 
+  def destroy
+    @skill.active = false
+    @skill.save
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def skill_params
-    params.require(:skill).permit(:title, :photo, :price_per_hour, :photo_cache, :description, :category, :location)
+    params.require(:skill).permit(:active, :title, :photo, :price_per_hour, :photo_cache, :description, :category, :location)
   end
 
   def set_user
