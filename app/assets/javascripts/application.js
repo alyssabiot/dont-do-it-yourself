@@ -12,3 +12,13 @@
 $(function () {
   $('input.datetimepicker').data({behaviour: "datetimepicker"}).datetimepicker();
 });
+
+$(document).ready(function() {
+  $(".skill-category-image").on("click", function(event) {
+    $(".skill-category-image").removeClass('red-border');
+    $(this).addClass('red-border');
+    var selected_category = $(this).attr('id');
+    console.log(selected_category);
+    $('#skill_category').val(selected_category);
+  });
+});
