@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Skill.destroy_all
 User.destroy_all
+Booking.destroy_all
 user1 = User.new(email: "alyssa@gmail.com", password: "123456")
 user1.first_name = "Alyssa"
 user1.last_name = "Biot"
