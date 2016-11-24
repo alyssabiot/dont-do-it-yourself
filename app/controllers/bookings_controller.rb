@@ -1,9 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_skill, only: [:new, :create]
-
-  def new
-    @booking = Booking.new
-  end
+  before_action :set_skill, only: [ :create]
 
   def create
     @booking = Booking.new(booking_params)
@@ -12,7 +8,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to user_path(current_user)
     else
-      render :new
+      render 'skills/show', skill: @skill, user: @user
     end
   end
 
