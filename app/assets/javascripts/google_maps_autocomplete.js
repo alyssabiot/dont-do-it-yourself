@@ -20,6 +20,8 @@ function onPlaceChanged() {
     $('#skill_country').val(components.country_code);
   }
 }
+
+
 function getAddressComponents(place) {
   // If you want lat/lng, you can look at:
   // - place.geometry.location.lat()
@@ -45,6 +47,7 @@ function getAddressComponents(place) {
         country_code = component.short_name;
       }
     }
+    {e.preventDefault();}
   }
   return {
     location: street_number == null ? route : (street_number + ' ' + route),

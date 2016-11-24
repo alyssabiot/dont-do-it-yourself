@@ -3,7 +3,7 @@
     <h1>DON'T DO IT YOURSELF</h1>
     <p>Enjoy your neighbour's skills</p>
     <form action="/skills" method="get" class="home-form">
-        <%= select_tag "location", options_for_select([ "Everywhere", "Paris", "Lille" ])%>
+        <input name="skill_location" autocomplete="on" id="skill_location" type="text" placeholder="Where ?">
         <%= select_tag "category", options_for_select([ "All categories", "Pets", "Kids", "Garden", "Handiwork", "Beauty / Well-being", "Sports", "IT", "Food", "Mechanics", "Photography", "Music", "Interior design", "Housekeeping", "Fashion", "Paper work / Legal", "Coaching", "Other" ]) %>
         <%= submit_tag "Submit", class: "btn btn-danger btn-lg" %>
     </form>
@@ -66,3 +66,8 @@
 
 <div class="bandeau-blanc">
 </div>
+
+<%= content_for(:after_js) do %>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDANjx3bosEtIyzJaoWs50Wnt6nt_1rmxU"></script>
+<% end %>
+

@@ -1,0 +1,5 @@
+<h3 ><%= link_to skill.title, skill_path(skill) %></h3>
+<h5>Offered by <%= link_to skill.user.first_name, user_path(skill.user)%></h5>
+<p><%= skill.location  %></p>
+
+

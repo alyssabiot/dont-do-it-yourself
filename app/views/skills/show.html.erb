@@ -202,7 +202,7 @@
 ]
             },
       internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        markers = handler.addMarkers(<%= raw @hash_skill.to_json %>);
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
         if (markers.length == 0) {
@@ -210,6 +210,7 @@
         } else if (markers.length == 1) {
           handler.getMap().setZoom(14);
         }
+
       });
     });
   <% end %>
