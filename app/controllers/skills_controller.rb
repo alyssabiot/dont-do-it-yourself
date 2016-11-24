@@ -4,19 +4,25 @@ class SkillsController < ApplicationController
 
   def index
     @skills = []
-    if params["category"] == "All categories"
-      @skills = Skill.all
+    if !user_signed_in?
+      if params["category"] == "All categories"
+        @skills = Skill.all
+      else
+        @skills = Skill.all.where(category: params["category"])
+      end
     else
-      @skills = Skill.all.where(category: params["category"])
+      if params["category"] == "All categories"
+        @skills = Skill.all.where.not(user: current_user)
+      else
+        @skills = Skill.where.not(user: current_user).where(category: params["category"])
+      end
     end
     @skills_locations = @skills.where.not(latitude: nil, longitude: nil)
     @hash_skills = Gmaps4rails.build_markers(@skills_locations) do |skill, marker|
       marker.lat skill.latitude
       marker.lng skill.longitude
       marker.infowindow render_to_string(partial: "/skills/map_box", locals: { skill: skill })
-
     end
-
   end
 
   def edit
