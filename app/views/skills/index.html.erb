@@ -1,84 +1,75 @@
 <div class="container">
-<h2>Check out those amazing skills!</h2>
-  <div class="row">
-    <div class="col-sm-7">
-      <% if @skills.empty? %>
-        <p>Sorry, we could't find the skill you are looking for... Check our others skills</p>
-      <% else %>
+  <% if @skills.empty? %>
+    <p>Sorry, we could't find the skill you are looking for... Check our others skills</p>
+  <% else %>
+    <h2>Check out those amazing skills!</h2>
+    <div class="row">
+      <div class="col-sm-7">
         <div class="row">
           <% @skills.each do |skill| %>
-            <div class="col-xs-12 col-sm-6">
-              <div class="card" >
-                <% if !skill.photo.blank? %>
-                  <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-                  url('<%= cl_image_path skill.photo %>');">
-                    <div class="card-category"><%= skill.category %></div>
-                    <div class="card-description">
-                      <%= link_to skill_path(skill) do %>
-                        <h2><%= skill.title %></h2>
-                      <% end %>
+            <%= link_to skill_path(skill) do %>
+              <div class="col-xs-12 col-sm-6">
+                <div class="card" >
+                  <% if !skill.photo.blank? %>
+                    <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                    url('<%= cl_image_path skill.photo %>');">
+                      <div class="card-category"><%= skill.category %></div>
+                      <div class="card-description">
+                          <h2><%= skill.title %></h2>
+                      </div>
+                      <div>
+                        <% if !skill.user.photo.blank? %>
+                          <%= cl_image_tag skill.user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar" %>
+                        <% else %>
+                          <%= image_tag "default_user_white.png", class: "card-user avatar"%>
+                        <% end %>
+                      </div>
                     </div>
-                    <div>
-                      <% if !skill.user.photo.blank? %>
-                        <%= cl_image_tag skill.user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar" %>
-                      <% else %>
-                        <%= image_tag "default_user_white.png", class: "card-user avatar"%>
-                      <% end %>
+                  <% else %>
+                    <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == skill.category } %>
+                    <% image_id = skill_hash[0][:photo_filepath] %>
+                    <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                    url('<%= image_url(image_id) %>');">
+                      <div class="card-category"><%= skill.category %></div>
+                      <div class="card-description">
+                          <h2><%= skill.title %></h2>
+                      </div>
+                      <div>
+                        <% if !skill.user.photo.blank? %>
+                          <%= cl_image_tag skill.user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar"  %>
+                        <% else %>
+                          <%= image_tag "default_user_white.png", class: "card-user avatar"%>
+                        <% end %>
+                      </div>
                     </div>
-                    <a class="card-link" href="#" ></a>
-                  </div>
-                <% else %>
-                  <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == skill.category } %>
-                  <% image_id = skill_hash[0][:photo_filepath] %>
-                  <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-                  url('<%= image_url(image_id) %>');">
-                    <div class="card-category"><%= skill.category %></div>
-                    <div class="card-description">
-                      <%= link_to skill_path(skill) do %>
-                      <h2><%= skill.title %></h2>
-          <!--             <p><%= skill.description %></p>
-           -->        <% end %>
-                    </div>
-                    <div>
-                      <% if !skill.user.photo.blank? %>
-                        <%= cl_image_tag skill.user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar"  %>
-                      <% else %>
-                        <%= image_tag "default_user_white.png", class: "card-user avatar"%>
-                      <% end %>
-                    </div>
-                  </div>
-                <% end %>
+                  <% end %>
+                </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
         </div>
-      <% end %>
-    </div>
-    <div class="col-sm-5">
-      <div id="map" style="width: 100%; height: 600px;"></div>
-      <% content_for(:after_js) do %>
-        <%= javascript_tag do %>
-          $(document).ready(function() {
-            var handler = Gmaps.build('Google');
-            handler.buildMap({
-            internal: { id: 'map' } }, function() {
-              markers = handler.addMarkers(<%= raw @hash.to_json %>);
-              handler.bounds.extendWith(markers);
-              handler.fitMapToBounds();
-              if (markers.length == 0) {
-                handler.getMap().setZoom(2);
-              } else if (markers.length == 1) {
-                handler.getMap().setZoom(14);
-              }
+      </div>
+      <div class="col-sm-5">
+        <div id="map" style="width: 100%; height: 600px;"></div>
+        <% content_for(:after_js) do %>
+          <%= javascript_tag do %>
+            $(document).ready(function() {
+              var handler = Gmaps.build('Google');
+              handler.buildMap({
+              internal: { id: 'map' } }, function() {
+                markers = handler.addMarkers(<%= raw @hash.to_json %>);
+                handler.bounds.extendWith(markers);
+                handler.fitMapToBounds();
+                if (markers.length == 0) {
+                  handler.getMap().setZoom(2);
+                } else if (markers.length == 1) {
+                  handler.getMap().setZoom(14);
+                }
+              });
             });
-          });
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
-
-
-<!-- Map -->
-
-
