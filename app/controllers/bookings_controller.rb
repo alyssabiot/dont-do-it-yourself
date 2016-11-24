@@ -8,6 +8,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to user_path(current_user)
     else
+      @user = @skill.user
       render 'skills/show', skill: @skill, user: @user
     end
   end

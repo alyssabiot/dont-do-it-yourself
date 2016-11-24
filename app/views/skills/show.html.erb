@@ -1,17 +1,56 @@
 <div>
   <% if !@skill.photo.blank? %>
     <div class="banner banner-skill" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-    url('<%= image_url('Beauty.jpg') %>');">
-      <div class="banner-content">
-        <h3><%=  @skill.title %></h3>
+    url('<%= cl_image_path @skill.photo %>');">
+        <% if current_user == @user %>
+          <div class="banner-content">
+            <h3><%=  @skill.title %></h3>
+          </div>
+        <% else %>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-8 col-sm-offset">
+                <h3><%=  @skill.title %></h3>
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <%= simple_form_for @booking, url: skill_bookings_path(@skill) do |f| %>
+                <h3>Book this skill</h3>
+                  <%= f.error_notification %>
+                  <%= f.input :starts_at, label: "Date and time", placeholder: "Select date and time", as: :string, input_html: { class: "datetimepicker" } %>
+                  <%= f.input :duration, label: "Duration in minutes", placeholder: "60" %>
+                  <%= f.button :submit, "Book", class: "btn btn-danger btn-lg" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   <% else %>
     <div class="banner banner-skill" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-    url('<%= image_url('Food.jpg') %>');">
-      <div class="banner-content">
-        <h3><%=  @skill.title %></h3>
-      </div>
+    url('<%= image_url(@image_id) %>');">
+      <% if current_user == @user %>
+          <div class="banner-content">
+            <h3><%=  @skill.title %></h3>
+          </div>
+        <% else %>
+          <div class="container">
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-8 col-sm-offset">
+                          <h3><%=  @skill.title %></h3>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                          <%= simple_form_for @booking, url: skill_bookings_path(@skill) do |f| %>
+                          <h3>Book this skill</h3>
+                            <%= f.error_notification %>
+                            <%= f.input :starts_at, label: "Date and time", placeholder: "Select date and time", as: :string, input_html: { class: "datetimepicker" } %>
+                            <%= f.input :duration, label: "Duration in minutes", placeholder: "60" %>
+                            <%= f.button :submit, "Book", class: "btn btn-danger btn-lg" %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+        <% end %>
     </div>
   <% end %>
 
@@ -53,12 +92,11 @@
           <% else %>
             <div class="row">
               <div class="col-xs-12">
-              <%= simple_form_for @booking, url: skill_bookings_path(@skill) do |f| %>
-                  <%= f.error_notification %>
-                  <%= f.input :starts_at, label: "Date and time", placeholder: "Select date and time", as: :string, input_html: { class: "datetimepicker" } %>
-                  <%= f.input :duration, label: "Duration in minutes", placeholder: "60" %>
-                  <%= f.button :submit, "Book", class: "btn btn-danger btn-lg" %>
-                <% end %>
+                <i class= "fa fa-star"></i>
+                <i class= "fa fa-star"></i>
+                <i class= "fa fa-star"></i>
+                <i class= "fa fa-star"></i>
+                <i class= "fa fa-star"></i>
               </div>
             </div>
           <% end %>
