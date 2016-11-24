@@ -1,19 +1,31 @@
+
+
 <div class="container">
   <div class="row">
-    <div class="col-sm-4 col-sm-offset-4">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>Add a new skill</h2>
       <%= simple_form_for [ @user, @skill ], url: user_skills_path(@user) do |f| %>
-        <%= f.input :title %>
-        <%= f.input :description %>
-        <%= f.input :category, collection: CATEGORIES %>
-        <%= f.input :location %>
-        <%= f.input :price_per_hour %>
-        <%= f.input :photo %>
+        <%= f.input :title, label: false, placeholder: 'Title of your skill' %>
+        <%= f.input :description, :input_html => { :cols => 5, :rows => 5 }, label: false, placeholder: 'Description of your skill'  %>
+        <h5> Select the category of your skill so that your neighbors find you! </h5>
+        <% CATEGORIES_PHOTOS.each do |hash_photo| %>
+            <div class="skill-category col-xs-12 col-md-3">
+              <div class="skill-category-image" id="<%= hash_photo[:category] %>" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+              url('<%= image_url(hash_photo[:photo_filepath]) %>');">
+                <div class="skill-category-text"><%=  hash_photo[:category] %></div>
+              </div>
+            </div>
+        <% end %>
+        <%= f.input :category, collection: CATEGORIES, as: :hidden %>
+        <%= f.input :location, label: false, placeholder: 'Address of your skill' %>
+        <%= f.input :price_per_hour, label: false, placeholder: 'Price per hour (EUR)' %>
+        <%= f.input :photo, label: "Add a photo to your skill [Recommended]"%>
         <%= f.input :photo_cache, as: :hidden %>
-        <%= f.submit %>
+        <%= f.submit "add a skill", class: "btn btn-lg btn-danger" %>
       <% end %>
     </div>
   </div>
 </div>
 <div class="bandeau-blanc">
 </div>
+
