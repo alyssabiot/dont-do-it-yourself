@@ -1,0 +1,25 @@
+.skill-category {
+  padding: 10px;
+}
+
+.red-border {
+  border: solid 10px red;
+}
+
+.skill-category-image {
+  width: 150px !important;
+  height: 150px !important;
+  background-size: cover;
+  font-size: 10px;
+  color: white;
+  position: relative;
+}
+
+.skill-category-text {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: white;
+}
