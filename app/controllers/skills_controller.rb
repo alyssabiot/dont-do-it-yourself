@@ -4,7 +4,7 @@ class SkillsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     if params[:category] == "All categories" && !params["skill_location"].empty?
-      @skills = Skill.near(params[:skill_location],0.5)
+      @skills = Skill.near(params[:skill_location],5)
     elsif params[:category] == "All categories"
       @skills = Skill.all
     elsif params[:category] != "All categories" && !params["skill_location"].empty?
