@@ -14,6 +14,16 @@ class ReviewsController < ApplicationController
     @review.user = current_user
     @skill = @booking.skill
     if @review.save
+      sum = 0
+      count = 0
+      @skill.bookings.each do |booking|
+        booking.reviews.each do |review|
+          sum += review.rating
+          count += 1
+        end
+      end
+      @skill.average_rating = sum/count
+      @skill.save
       redirect_to skill_path(@skill)
     else
       render :new
