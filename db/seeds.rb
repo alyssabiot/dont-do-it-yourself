@@ -48,10 +48,30 @@ skill1.user = user1
 skill1.save!
 
 skill2 = Skill.new(category: "Kids", location:"150 avenue des Champs Élysées, Paris", price_per_hour: 12, title: "Kids homework", description: "Titulaire d'un CAP petite enfance, j'aide vos enfants à faire leurs devoirs, toutes matières primaire et collège. Patiente et énergique, je prendrai le plus grand soin de vos rejetons !")
-
 skill2.user = user1
 skill2.save!
 
 skill3 = Skill.new(category: "Kids", location:"46 boulevard Voltaire, Paris", price_per_hour: 12, title: "Help your kids out with their homeworks", description: "Professeur particulier à domicile de mathématiques pour collègiens et lycéens en difficulté ! Avec moi, les résultats sont visibles dès le premier cours !")
 skill3.user = user2
 skill3.save!
+
+booking1 = Booking.new(starts_at: "11/26/2016 3:54 PM", duration: 60)
+booking1.skill = skill1
+booking1.user = user2
+booking1.save!
+
+booking2 = Booking.new(starts_at: "01/19/2017 11:26 AM", duration: 30)
+booking2.skill = skill1
+booking2.user = user3
+booking2.save!
+
+review1 = Review.new(content: "Alyssa a été merveilleuse avec mes 4 dobbermans", rating: 5)
+review1.user = user2
+review1.skill = skill1
+review1.save!
+
+review2 = Review.new(content: "Sympa mais pas toujours à l'heure, en plsu elle avait oublié son téléphone portable", rating: 3)
+review2.user = user3
+review2.skill = skill1
+review2.save!
+
