@@ -135,7 +135,7 @@
             </div>
             <!-- Button -->
             <div class="button-list">
-              <button class = "btn btn-danger">Rate this booking</button>
+              <%= link_to "Rate this booking", new_booking_review_path(booking), class: "btn btn-danger"%>
             </div>
           </div>
         <% end %>
