@@ -181,7 +181,7 @@
               <!-- profile -->
               <div class="organizer-list">
                 <%= link_to user_path(booking.skill.user) do %>
-                  <h3><%= booking.user.first_name %> <%= booking.skill.user.last_name %></h3>
+                  <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
                   <% if !booking.user.photo.blank? %>
                     <%= cl_image_tag booking.user.photo, width: 200, height: 200, crop: :fill, class: "avatar-large"   %>
                   <% else %>
