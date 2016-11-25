@@ -11,3 +11,4 @@ Rails.application.routes.draw do
   end
   resources :bookings, only: [ :index, :show, :edit, :update ]
 end
+
