@@ -4,7 +4,7 @@ class CreateSkills < ActiveRecord::Migration[5.0]
       t.string :category
       t.string :location
       t.float :price_per_hour
-      t.float :average_rating
+      t.float :average_rating, default: 0
       t.string :title
       t.text :description
       t.references :user, foreign_key: true
