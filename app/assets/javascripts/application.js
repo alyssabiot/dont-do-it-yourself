@@ -22,3 +22,18 @@ $(document).ready(function() {
     $('#skill_category').val(selected_category);
   });
 });
+
+$(function(){
+  $(".tab").on("click", function(e){
+    $(".tab").removeClass('active');
+    $(this).addClass('active'); // Change active tab
+
+    // Hide all tab-content (use class="hidden")
+    $(".tab-content").addClass('hidden');
+
+    // Show target tab-content (use class="hidden")
+    id = $(this).data("target");
+    $(id).removeClass('hidden');
+  });
+
+});

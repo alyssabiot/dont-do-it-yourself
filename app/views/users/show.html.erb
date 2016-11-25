@@ -5,55 +5,8 @@
   <% else %>
     <%= image_tag "default-profile.png", class: "avatar-large"%>
   <% end %>
-  <h2>My Skills</h2>
-  <div class="bandeau-blanc">
-  </div>
-  <div class="row">
-    <% @user.skills.each do |skill| %>
-      <%= link_to skill_path(skill) do %>
-        <div class="col-xs-12 col-sm-4">
-          <div class="card" >
-            <% if !skill.photo.blank? %>
-              <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-              url('<%= cl_image_path skill.photo %>');">
-                <div class="card-category"><%= skill.category %></div>
-                <div class="card-description">
-                    <h2><%= skill.title %></h2>
-                </div>
-                <div>
-                  <% if !@user.photo.blank? %>
-                    <%= cl_image_tag @user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar"%>
-                  <% else %>
-                    <%= image_tag "default_user_white.png", class: "card-user avatar"%>
-                  <% end %>
-                </div>
-              </div>
-            <% else %>
-              <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == skill.category } %>
-              <% image_id = skill_hash[0][:photo_filepath] %>
-              <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-              url('<%= image_url(image_id) %>');">
-                <div class="card-category"><%= skill.category %></div>
-                <div class="card-description">
-                  <h2><%= skill.title %></h2>
-                </div>
-                <div>
-                  <% if !@user.photo.blank? %>
-                    <%= cl_image_tag @user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar" %>
-                  <% else %>
-                    <%= image_tag "default_user_white.png", class: "card-user avatar"%>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="bandeau-blanc">
-  </div>
-  <% if current_user == @user %>
+
+    <% if current_user == @user %>
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-4 col-md-offset-4">
@@ -66,12 +19,71 @@
     </div>
   <% end %>
 
-  <% if @user == current_user %>
+  <!-- TABS INDEX -->
+  <div class="tabs">
+    <a class="tab active" data-target="#my_skills">
+      <h2>My skills</h2>
+    </a>
+    <a class="tab" data-target="#my_bookings">
+      <h2>My bookings</h2>
+    </a>
+    <a class="tab" data-target="#my_booked_skills">
+      <h2>My booked skills</h2>
+    </a>
+  </div>
 
-  <% if @user.bookings.length > 0 %>
-    <h2>My Bookings as a user</h2>
-      <div class="bandeau-blanc">
+  <!-- TABS CONTENT -->
+  <div class="container text-center">
+
+    <!-- MY SKILLS -->
+    <div class="tab-content" id="my_skills">
+      <div class="row">
+        <% @user.skills.each do |skill| %>
+          <%= link_to skill_path(skill) do %>
+            <div class="col-xs-12 col-sm-4">
+              <div class="card" >
+                <% if !skill.photo.blank? %>
+                  <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                  url('<%= cl_image_path skill.photo %>');">
+                    <div class="card-category"><%= skill.category %></div>
+                    <div class="card-description">
+                        <h2><%= skill.title %></h2>
+                    </div>
+                    <div>
+                      <% if !@user.photo.blank? %>
+                        <%= cl_image_tag @user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar"%>
+                      <% else %>
+                        <%= image_tag "default_user_white.png", class: "card-user avatar"%>
+                      <% end %>
+                    </div>
+                  </div>
+                <% else %>
+                  <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == skill.category } %>
+                  <% image_id = skill_hash[0][:photo_filepath] %>
+                  <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                  url('<%= image_url(image_id) %>');">
+                    <div class="card-category"><%= skill.category %></div>
+                    <div class="card-description">
+                      <h2><%= skill.title %></h2>
+                    </div>
+                    <div>
+                      <% if !@user.photo.blank? %>
+                        <%= cl_image_tag @user.photo, width: 200, height: 200, crop: :fill, class: "card-user avatar" %>
+                      <% else %>
+                        <%= image_tag "default_user_white.png", class: "card-user avatar"%>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       </div>
+    </div>
+
+    <!-- MY BOOKINGS -->
+    <div class="tab-content hidden" id="my_bookings">
       <div class="row">
         <% @user.bookings.each do |booking| %>
           <%= link_to user_path(booking.skill.user) do %>
@@ -123,93 +135,89 @@
           <% end %>
         <% end %>
       </div>
-    <% end %>
-    <% @user.skills.each do |skill| %>
-      <% if skill.bookings.length > 0 %>
-      <h2>My Bookings as a skilled one</h2>
-      <div class="bandeau-blanc">
-      </div>
-      <div class="row">
-        <% skill.bookings.each do |booking| %>
-          <%= link_to '#', data: { toggle: "modal", target: "#myModal" } do %>
-            <div class="col-xs-12 col-sm-4">
-              <div class="card" >
-                <% if !skill.photo.blank? %>
+    </div>
+
+    <!-- MY BOOKED SKILLS -->
+    <div class="tab-content hidden" id="my_booked_skills">
+      <% @user.skills.each do |skill| %>
+        <div class="row">
+          <% skill.bookings.each do |booking| %>
+            <%= link_to '#', data: { toggle: "modal", target: "#myModal" } do %>
+              <div class="col-xs-12 col-sm-4">
+                <div class="card" >
+                  <% if !skill.photo.blank? %>
+                    <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                    url('<%= cl_image_path booking.skill.photo %>');">
+                      <div class="card-category"><%= skill.category %></div>
+                      <div class="card-status">
+                        <% if booking.accepted == "pending" %>
+                          <i class="fa fa-question-circle" style="color: orange;"></i>
+                        <% elsif booking.accepted == "Accept this booking" %>
+                          <i class="fa fa-check-circle" style="color: green;"></i>
+                        <% else %>
+                          <i class="fa fa-times-circle" style="color: red;"></i>
+                        <% end %>
+                      </div>
+                      <div class="card-description">
+                          <h2><%= skill.title %> for <%= booking.user.first_name %></h2>
+                          <h3><%= booking.starts_at %></h3>
+                          <p><%= booking.duration %> minutes</p>
+                      </div>
+                    </div>
+                  <% else %>
+                  <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == booking.skill.category } %>
+                  <% image_id = skill_hash[0][:photo_filepath] %>
                   <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-                  url('<%= cl_image_path booking.skill.photo %>');">
-                    <div class="card-category"><%= skill.category %></div>
-                    <div class="card-status">
-                      <% if booking.accepted == "pending" %>
-                        <i class="fa fa-question-circle" style="color: orange;"></i>
-                      <% elsif booking.accepted == "Accept this booking" %>
-                        <i class="fa fa-check-circle" style="color: green;"></i>
-                      <% else %>
-                        <i class="fa fa-times-circle" style="color: red;"></i>
-                      <% end %>
+                  url('<%= image_url(image_id) %>');">
+                      <div class="card-category"><%= skill.category %></div>
+                      <div class="card-status">
+                        <% if booking.accepted == "pending" %>
+                          <i class="fa fa-question-circle" style="color: orange;"></i>
+                        <% elsif booking.accepted == "Accept this booking" %>
+                          <i class="fa fa-check-circle" style="color: green;"></i>
+                        <% else %>
+                          <i class="fa fa-times-circle" style="color: red;"></i>
+                        <% end %>
+                      </div>
+                      <div class="card-description">
+                          <h2><%= skill.title %> for <%= booking.user.first_name %></h2>
+                          <p><%= booking.starts_at %></p>
+                          <p><%= booking.duration %> minutes </p>
+                      </div>
                     </div>
-                    <div class="card-description">
-                        <h2><%= skill.title %> for <%= booking.user.first_name %></h2>
-                        <h3><%= booking.starts_at %></h3>
-                        <p><%= booking.duration %> minutes</p>
-                    </div>
-                  </div>
-                <% else %>
-                <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == booking.skill.category } %>
-                <% image_id = skill_hash[0][:photo_filepath] %>
-                <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-                url('<%= image_url(image_id) %>');">
-                    <div class="card-category"><%= skill.category %></div>
-                    <div class="card-status">
-                      <% if booking.accepted == "pending" %>
-                        <i class="fa fa-question-circle" style="color: orange;"></i>
-                      <% elsif booking.accepted == "Accept this booking" %>
-                        <i class="fa fa-check-circle" style="color: green;"></i>
-                      <% else %>
-                        <i class="fa fa-times-circle" style="color: red;"></i>
-                      <% end %>
-                    </div>
-                    <div class="card-description">
-                        <h2><%= skill.title %> for <%= booking.user.first_name %></h2>
-                        <p><%= booking.starts_at %></p>
-                        <p><%= booking.duration %> minutes </p>
-                    </div>
-                  </div>
-                <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
 
-
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Change the status of this booking</h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= simple_form_for(booking) do |f| %>
+                      <%= f.error_notification %>
+                      <%= f.input :accepted, label: false, collection: ["Accept this booking", "Refuse this booking"]  %>
+                      <%= f.button :submit, "Submit", class: "btn btn-danger btn-lg" %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- END OF MODAL -->
+
           <% end %>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Change the status of this booking</h4>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for(booking) do |f| %>
-          <%= f.error_notification %>
-          <%= f.input :accepted, label: false, collection: ["Accept this booking", "Refuse this booking"]  %>
-          <%= f.button :submit, "Submit", class: "btn btn-danger btn-lg" %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-        <% end %>
-      </div>
-    <% end %>
-      <div class="bandeau-blanc">
-      </div>
-    <% end %>
-  </div>
-<% end %>
 
 
-
-<div class="bandeau-blanc">
-</div>
 
 
