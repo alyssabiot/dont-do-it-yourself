@@ -14,23 +14,34 @@
 
 .container-list {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  background-color: #EFEFEF;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 2px #DFDDDE;
 }
 
 .card-list {
-  width: 70%;
+  flex: 0 0 300px;
 }
 
-.organizer-profile {
-  flex: 1 1 auto
+.organizer-list {
+  flex: 1;
 }
 
-.status {
+.status-list {
+  flex: 0 0 auto;
+  width: 200px;
+  h4 {
+    color: black;
+  }
 }
 
-.button-rate {
-
+.button-list {
+  flex: 0 0 auto;
+  width: 300px;
 }
 
 .tab {
