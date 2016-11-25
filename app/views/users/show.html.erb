@@ -6,11 +6,11 @@
     <%= image_tag "default-profile.png", class: "avatar-large"%>
   <% end %>
 
-    <% if current_user == @user %>
+  <% if current_user == @user %>
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-4 col-md-offset-4">
-          <div class="flexbox-buttons">
+          <div class="flexbox-buttons light-padded">
             <%= link_to "Add a Skill", new_user_skill_path(@user), class: "btn btn-danger" %>
             <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-danger" %>
           </div>
@@ -86,53 +86,77 @@
     <div class="tab-content hidden" id="my_bookings">
       <div class="row">
         <% @user.bookings.each do |booking| %>
-          <%= link_to user_path(booking.skill.user) do %>
-            <div class="col-xs-12 col-sm-4">
-              <div class="card" >
-                <% if !booking.skill.photo.blank? %>
-                  <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-                  url('<%= cl_image_path booking.skill.photo %>');">
-                    <div class="card-category"><%= booking.skill.category %></div>
-                    <div class="card-status">
-                      <% if booking.accepted == "pending" %>
-                        <i class="fa fa-question-circle" style="color: orange;"></i>
-                      <% elsif booking.accepted == "Accept this booking" %>
-                        <i class="fa fa-check-circle" style="color: green;"></i>
-                      <% else %>
-                        <i class="fa fa-times-circle" style="color: red;"></i>
-                      <% end %>
-                    </div>
-                    <div class="card-description">
-                        <h2><%= booking.skill.title %> with <%= booking.skill.user.first_name %></h2>
-                        <h3><%= booking.starts_at %></h3>
-                        <p><%= booking.duration %> minutes</p>
-                    </div>
+          <div class="container-list">
+            <!-- Card -->
+            <div class="card-list">
+              <%= link_to user_path(booking.skill.user) do %>
+                <div class="col-xs-12 col-sm-4">
+                  <div class="card" >
+                    <% if !booking.skill.photo.blank? %>
+                      <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                      url('<%= cl_image_path booking.skill.photo %>');">
+                        <div class="card-category"><%= booking.skill.category %></div>
+                        <div class="card-status">
+                          <% if booking.accepted == "pending" %>
+                            <i class="fa fa-question-circle" style="color: orange;"></i>
+                          <% elsif booking.accepted == "Accept this booking" %>
+                            <i class="fa fa-check-circle" style="color: green;"></i>
+                          <% else %>
+                            <i class="fa fa-times-circle" style="color: red;"></i>
+                          <% end %>
+                        </div>
+                        <div class="card-description">
+                            <h2><%= booking.skill.title %> with <%= booking.skill.user.first_name %></h2>
+                            <h3><%= booking.starts_at %></h3>
+                            <p><%= booking.duration %> minutes</p>
+                        </div>
+                      </div>
+                    <% else %>
+                      <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == booking.skill.category } %>
+                      <% image_id = skill_hash[0][:photo_filepath] %>
+                      <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+                      url('<%= image_url(image_id) %>');">
+                        <div class="card-category"><%= booking.skill.category %></div>
+                        <div class="card-status">
+                          <% if booking.accepted == "pending" %>
+                            <i class="fa fa-question-circle" style="color: orange;"></i>
+                          <% elsif booking.accepted == "Accept this booking" %>
+                            <i class="fa fa-check-circle" style="color: green;"></i>
+                          <% else %>
+                            <i class="fa fa-times-circle" style="color: red;"></i>
+                          <% end %>
+                        </div>
+                        <div class="card-description">
+                            <h2><%= booking.skill.title %> with <%= booking.skill.user.first_name %></h2>
+                            <p><%= booking.starts_at %></p>
+                            <p><%= booking.duration %> minutes </p>
+                        </div>
+                      </div>
+                    <% end %>
                   </div>
-                <% else %>
-                <% skill_hash = CATEGORIES_PHOTOS.select { |hash| hash[:category] == booking.skill.category } %>
-                <% image_id = skill_hash[0][:photo_filepath] %>
-                <div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
-                url('<%= image_url(image_id) %>');">
-                    <div class="card-category"><%= booking.skill.category %></div>
-                    <div class="card-status">
-                      <% if booking.accepted == "pending" %>
-                        <i class="fa fa-question-circle" style="color: orange;"></i>
-                      <% elsif booking.accepted == "Accept this booking" %>
-                        <i class="fa fa-check-circle" style="color: green;"></i>
-                      <% else %>
-                        <i class="fa fa-times-circle" style="color: red;"></i>
-                      <% end %>
-                    </div>
-                    <div class="card-description">
-                        <h2><%= booking.skill.title %> with <%= booking.skill.user.first_name %></h2>
-                        <p><%= booking.starts_at %></p>
-                        <p><%= booking.duration %> minutes </p>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+            <!-- Organizer -->
+            <div class="organizer-profile">
+              <%= link_to user_path(booking.skill.user) do %>
+                <h3><%= booking.skill.user.first_name %> <%= booking.skill.user.last_name %></h3>
+                <% if !booking.skill.user.photo.blank? %>
+                  <%= cl_image_tag booking.skill.user.photo, width: 200, height: 200, crop: :fill, class: "avatar-large"   %>
+                <% else %>
+                  <%= image_tag "default-profile.png", class: "avatar-large"%>
+                <% end %>
+              <% end %>
+            </div>
+            <!-- Status -->
+            <div class="status">
+                <h3>Status : <%= booking.accepted %></h3>
+            </div>
+            <!-- Rate button -->
+            <div class="button-rate">
+                <button class = "btn btn-lg btn-primary">Rate this booking!</button>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
