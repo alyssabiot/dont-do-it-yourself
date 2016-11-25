@@ -1,7 +1,7 @@
 class SkillsController < ApplicationController
   before_action :set_user, only: [:new, :create]
   before_action :set_skill, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @skills = []
     if !user_signed_in?
