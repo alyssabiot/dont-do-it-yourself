@@ -12,6 +12,27 @@
   opacity: 0.8;
 }
 
+.container-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-list {
+  width: 70%;
+}
+
+.organizer-profile {
+  flex: 1 1 auto
+}
+
+.status {
+}
+
+.button-rate {
+
+}
+
 .tab {
   background: $light-gray;
   flex: 1 1 auto;
