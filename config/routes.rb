@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :skills, only: [ :index, :show, :edit, :update, :destroy ] do
     resources :bookings, only: [ :create ]
+    resources :reviews, only: [ :create ]
   end
   resources :users, only: [ :index, :show, :new, :create, :edit, :update ] do
     resources :skills, only: [ :new, :create ]

@@ -60,7 +60,8 @@ class Skill < ApplicationRecord
   default_scope { where(active: true) }
   mount_uploader :photo, PhotoUploader
   belongs_to :user
-  has_many :bookings
+  has_many :bookings, dependent: :nullify
+  has_many :reviews, dependent: :nullify
   validates :category, presence: true, inclusion: { in: CATEGORIES }
   validates :location, presence: true, allow_blank: false
   validates :title, presence: true, allow_blank: false
