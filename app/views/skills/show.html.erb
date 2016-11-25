@@ -92,11 +92,12 @@
           <% else %>
             <div class="row">
               <div class="col-xs-12">
-                <i class= "fa fa-star"></i>
-                <i class= "fa fa-star"></i>
-                <i class= "fa fa-star"></i>
-                <i class= "fa fa-star"></i>
-                <i class= "fa fa-star"></i>
+                <% @skill.average_rating.round.times do %>
+                  <i class= "fa fa-star" style="color:yellow; font-size:25px"></i>
+                <% end %>
+                <% (5 - @skill.average_rating.round).times do %>
+                  <i class= "fa fa-star" style="font-size:25px"></i>
+                <% end %>
               </div>
             </div>
           <% end %>
