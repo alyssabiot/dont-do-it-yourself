@@ -15,7 +15,14 @@ class BookingsController < ApplicationController
 
   def update
     @booking = Booking.find(params[:id])
-    @booking.accepted = params[:booking][:accepted]
+    answer = params[:booking][:accepted]
+    if answer == "Accept this booking"
+      @booking.accepted = "Accepted"
+    elsif answer == "Refuse this booking"
+      @booking.accepted = "Refused"
+    else
+      @booking.accepted = "Pending"
+    end
     @booking.save
     redirect_to user_path(current_user)
   end
