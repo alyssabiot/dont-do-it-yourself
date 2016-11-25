@@ -97,7 +97,7 @@
                         <div class="card-category"><%= booking.skill.category %></div>
                         <div class="card-description">
                             <h2><%= booking.skill.title %> with <%= booking.skill.user.first_name %></h2>
-                            <h3><%= booking.starts_at %></h3>
+                            <p><%= booking.starts_at %></p>
                             <p><%= booking.duration %> minutes</p>
                         </div>
                       </div>
@@ -158,7 +158,7 @@
                           <div class="card-category"><%= booking.skill.category %></div>
                           <div class="card-description">
                               <h2><%= booking.skill.title %> with <%= booking.skill.user.first_name %></h2>
-                              <h3><%= booking.starts_at %></h3>
+                              <p><%= booking.starts_at %></p>
                               <p><%= booking.duration %> minutes</p>
                           </div>
                         </div>
@@ -180,7 +180,7 @@
               </div>
               <!-- profile -->
               <div class="organizer-list">
-                <%= link_to user_path(booking.skill.user) do %>
+                <%= link_to user_path(booking.user) do %>
                   <h3><%= booking.user.first_name %> <%= booking.user.last_name %></h3>
                   <% if !booking.user.photo.blank? %>
                     <%= cl_image_tag booking.user.photo, width: 200, height: 200, crop: :fill, class: "avatar-large"   %>
