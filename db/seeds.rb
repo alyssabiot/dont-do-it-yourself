@@ -65,13 +65,22 @@ booking2.skill = skill1
 booking2.user = user3
 booking2.save!
 
-review1 = Review.new(content: "Alyssa a été merveilleuse avec mes 4 dobbermans", rating: 5)
+booking3 = Booking.new(starts_at: "12/25/2016 11:26 AM", duration: 1)
+booking2.skill = skill3
+booking2.user = user3
+booking2.save!
+
+review1 = Review.new(content: "Alyssa a été merveilleuse avec mes 4 enfants", rating: 5)
 review1.user = user2
-review1.skill = skill1
+review1.booking = booking1
 review1.save!
 
 review2 = Review.new(content: "Sympa mais pas toujours à l'heure, en plsu elle avait oublié son téléphone portable", rating: 3)
 review2.user = user3
-review2.skill = skill1
+review2.booking = booking1
 review2.save!
 
+review3 = Review.new(content: "Sympa mais elle avait oublié son téléphone portable", rating: 3)
+review3.user = user3
+review3.booking = booking2
+review3.save!
