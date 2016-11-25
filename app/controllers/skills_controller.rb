@@ -3,20 +3,18 @@ class SkillsController < ApplicationController
   before_action :set_skill, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @skills = []
-    if !user_signed_in?
-      if params["category"] == "All categories"
-        @skills = Skill.all
-      else
-        @skills = Skill.all.where(category: params["category"])
-      end
+    if params[:category] == "All categories" && !params["skill_location"].empty?
+      @skills = Skill.near(params[:skill_location],0.5)
+    elsif params[:category] == "All categories"
+      @skills = Skill.all
+    elsif params[:category] != "All categories" && !params["skill_location"].empty?
+      @skills = Skill.all.where(category: params[:category]).near(params[:skill_location],5)
     else
-      if params["category"] == "All categories"
-        @skills = Skill.all.where.not(user: current_user)
-      else
-        @skills = Skill.where.not(user: current_user).where(category: params["category"])
-      end
+      @skills = Skill.all.where(category: params[:category])
     end
+
+    @skills = @skills.where.not(user: current_user) if user_signed_in? && !@skills.nil?
+
     @skills_locations = @skills.where.not(latitude: nil, longitude: nil)
     @hash_skills = Gmaps4rails.build_markers(@skills_locations) do |skill, marker|
       marker.lat skill.latitude
@@ -79,4 +77,6 @@ class SkillsController < ApplicationController
   def set_skill
     @skill = Skill.find(params[:id])
   end
+
+
 end
