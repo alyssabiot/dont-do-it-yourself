@@ -196,7 +196,8 @@
               </div>
               <!-- Button -->
               <div class="button-list">
-                <%= link_to '#', data: { toggle: "modal", target: "#myModal" } do %>
+                <%= link_to '#', data: { toggle: "modal", target: "#myModal_"+
+                  booking.id.to_s } do %>
                   <button class = "btn btn-danger">Update Status</button>
                 <% end %>
               </div>
@@ -205,7 +206,7 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="myModal_<%=booking.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
